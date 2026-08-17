@@ -1,0 +1,7 @@
+{
+  "proxy": "http://user:pass@ip:port",
+  "sitekey": "a5f74b19-9e45-40e0-b45d-47ff91b7a6c2",
+  "url": "https://accounts.hcaptcha.com/demo",
+  "max_challenges": 30,
+  "delay_sec": 2
+}
