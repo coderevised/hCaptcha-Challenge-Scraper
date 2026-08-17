@@ -1,0 +1,129 @@
+{
+  "errs": {
+    "list": []
+  },
+  "rand": [
+    0.170303160232496,
+    0.196710617222251
+  ],
+  "events": [
+    [
+      2225807412,
+      "[\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36\", \"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36\", 4, 6, \"en\", [\"en\", \"en-GB\", \"en-US\"], \"Win32\", null, [\"Not;A=Brand 8\", \"Chromium 145\", \"Google Chrome 145\"], false, \"Windows\", 0, 7, true, false, false, false, true, \"[object Keyboard]\", false, false]"
+    ],
+    [
+      682230982,
+      "[4139208060, 742866589, 3245240503]"
+    ],
+    [
+      1095284879,
+      "6396013060087564094"
+    ],
+    [
+      2185405612,
+      "[6395, 2639, 7295]"
+    ],
+    [
+      3430096020,
+      "[3603938822, 1170234569]"
+    ],
+    [
+      2704594749,
+      "[1, 2, 3, 4]"
+    ],
+    [
+      1600445687,
+      "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]"
+    ],
+    [
+      2372601827,
+      "{\"s\": 0, \"n\": 0, \"bfp\": 1, \"bfc\": 1, \"big\": 0, \"p\": 0, \"gcs\": 1}"
+    ],
+    [
+      610237040,
+      "[950068747, 3704569820, 1710616309]"
+    ],
+    [
+      45581596,
+      "7095799562447742535"
+    ],
+    [
+      795042500,
+      "[13762, 6367]"
+    ],
+    [
+      1277777283,
+      "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]"
+    ]
+  ],
+  "vendor": "Google Inc. (Intel)",
+  "renderer": "ANGLE (Intel, Intel(R) UHD Graphics 770 (0x00004680) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "components": {
+    "chrome": true,
+    "screen": {
+      "width": 1366,
+      "height": 768,
+      "avail_width": 1366,
+      "color_depth": 24,
+      "pixel_depth": 24,
+      "avail_height": 728
+    },
+    "features": {
+      "fetch": true,
+      "web_rtc": true,
+      "canvas_2d": true,
+      "web_audio": true,
+      "performance_entries": true
+    },
+    "has_touch": false,
+    "navigator": {
+      "language": "en",
+      "platform": "Win32",
+      "languages": [
+        "en",
+        "en-GB",
+        "en-US"
+      ],
+      "webdriver": false,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+      "max_touch_points": 0,
+      "plugins_undefined": false,
+      "notification_query_permission": "Default"
+    },
+    "audio_hash": "-1",
+    "extensions": [
+      false
+    ],
+    "canvas_hash": "7399374192269016971",
+    "err_firefox": null,
+    "r_bot_score": 0,
+    "unique_keys": "0,Object,Function,Array,Number,parseFloat,parseInt,Infinity,NaN,undefined,Boolean,String,Symbol,Date,Promise,RegExp,Error,AggregateError,EvalError,RangeError,ReferenceError,SyntaxError,TypeError,URIError,globalThis,JSON,Math,Intl,ArrayBuffer,Atomics,Uint8Array,Int8Array,Uint16Array,Int16Array,Uint32Array,Int32Array,BigUint64Array,BigInt64Array,Uint8ClampedArray,Float32Array,Float64Array,DataView,Map,BigInt,Set,Iterator,WeakMap,WeakSet,Proxy,Reflect",
+    "web_gl_hash": "5258656543054698520",
+    "webrtc_hash": "2779667431561809285",
+    "r_bot_score_2": 0,
+    "has_indexed_db": true,
+    "inv_unique_keys": "localStorage,sessionStorage",
+    "parent_win_hash": "1794473770067626861",
+    "common_keys_hash": 1152194586,
+    "common_keys_tail": "m6goztb,fuzn9KK,q_FSmf,NpQi3cc,tYAehvh,crv0SMN,NNwQMu,RES74Dh,OpuHnbl,M2TpNCZ,rnB5Lb,ae9TA4,qwhYE1,SDdabD,setupEnforcement,FingerprintJS,iSUgDe,F8Tx0z1,ym5EGMM,U0H0YeX,ak4YFT,__globalObject,__TextDecoder,__Uint8Array,__Buffer,__String,__Array,utf8ArrayToStr,_HQ1y1d,sG9PJ6,KZ57iW2,T8QwtO9,arkoseLabsClientApibc605911,regeneratorRuntime,ark",
+    "performance_hash": "6649016371466763233",
+    "to_string_length": 0,
+    "has_local_storage": true,
+    "device_pixel_ratio": 1,
+    "has_session_storage": true,
+    "notification_api_permission": "Default",
+    "r_bot_score_suspicious_keys": []
+  },
+  "stack_data": [
+    "new __Array\npPiZ7z\nObject.get",
+    "new __Array\npPiZ7z",
+    "Array.forEach (<anonymous>)",
+    "Array.reduce (<anonymous>)",
+    "<anonymous>",
+    "Generator.next (<anonymous>)",
+    "new Promise (<anonymous>)",
+    "Array.map (<anonymous>)\nGenerator.next (<anonymous>)",
+    "Array.map (<anonymous>)\nnew Promise (<anonymous>)"
+  ],
+  "suspicious_events": []
+}
