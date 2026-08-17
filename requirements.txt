@@ -1,0 +1,4 @@
+matplotlib>=3.7.0
+numpy>=1.24.0
+requests>=2.31.0
+wcwidth>=0.2.5

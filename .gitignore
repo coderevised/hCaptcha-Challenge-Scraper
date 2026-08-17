@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# User-specific
+fingerprint.json
+config/config.json
+
+# Output
+challenges/
+
+# Misc
+.DS_Store
