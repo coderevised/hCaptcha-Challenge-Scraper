@@ -408,18 +408,6 @@ This project is licensed under the **MIT License**.
 
 ---
 
-# 👨‍💻 Author
-
 <p align="center">
-
-### **CodeRevised**
-
-Python • Automation • Reverse Engineering • Security Research
-
-</p>
-
----
-
-<p align="center">
-Made with ❤️ by <b>CodeRevised</b>
+Made with <$ by <b>CodeRevised</b>
 </p>
