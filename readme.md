@@ -1,413 +1,226 @@
-# 🕸️ hCaptcha Challenge Scraper
-
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white">
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge">
-  <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-blue?style=for-the-badge">
-</p>
-
-<p align="center">
-  <b>Automated hCaptcha dataset collection with browser fingerprinting, human-like motion simulation, HSL solving, and structured media extraction.</b>
+  <h1 align="center">hCaptcha Challenge Scraper</h1>
+  <p align="center">
+    A high-performance tool for collecting hCaptcha challenge datasets, including images, metadata, and challenge configurations. Built for researchers and developers working on captcha analysis and machine learning pipelines.
+  </p>
 </p>
 
 ---
 
-## 📌 Overview
+## Table of Contents
 
-**hCaptcha Challenge Scraper** is a modular Python project for collecting hCaptcha challenge datasets.
-
-It automates the complete collection pipeline—from realistic browser fingerprint generation and human-like cursor simulation to HSL proof solving, challenge retrieval, media downloading, and structured dataset organization.
-
-The project was built with maintainability in mind, featuring a clean architecture, colorful component-based logging, telemetry, proxy support, and robust error handling.
-
-> **Educational & Research Project**
->
-> This project is intended for security research, reverse engineering, dataset generation, and academic experimentation.
-
----
-
-# ✨ Features
-
-* 🎯 Automated hCaptcha challenge collection
-* 🧠 Local HSL proof solving
-* 🖥️ Realistic browser fingerprint generation
-* 🖱️ Human-like cursor movement simulation
-* 📈 Motion curve generation
-* 🌐 HTTP/HTTPS proxy support
-* 📥 Automatic media downloading
-* 📂 Structured dataset organization
-* 🎨 Beautiful Sakura-themed CLI
-* 📊 Performance telemetry
-* 🧩 Modular architecture
-* ⚡ Lightweight & easy to extend
+- [Overview](#overview)
+- [Features](#features)
+- [Supported Challenge Types](#supported-challenge-types)
+- [Proxy Provider](#proxy-provider)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Screenshots](#screenshots)
+- [License](#license)
 
 ---
 
-# 📂 Project Structure
+## Overview
 
-```text
-hcaptcha-challenge-scraper/
-│
-├── fetcher.py
-├── generate_fingerprint.py
-├── fingerprint.json
-├── requirements.txt
-├── README.md
-│
-├── scraper/
-│   ├── __init__.py
-│   ├── banner.py
-│   ├── config.py
-│   ├── logger.py
-│   └── scraper.py
-│
-├── core/
-│   ├── cursorflow.py
-│   ├── hcaptcha_client.py
-│   ├── hsl_solver.py
-│   ├── http_client.py
-│   ├── motion.py
-│   ├── saver.py
-│   └── telemetry.py
-│
-├── config/
-│   └── config.json
-│
-└── challenges/
-    ├── image_drag_drop/
-    ├── image_label_binary/
-    ├── image_label_area_select/
-    └── ...
-```
+hCaptcha Challenge Scraper automates the process of fetching and archiving hCaptcha challenges from any site that uses hCaptcha. It handles the full hCaptcha lifecycle — version detection, site configuration retrieval, HSL proof-of-work solving, challenge fetching, and media downloading — all through direct HTTP requests with no browser automation required.
+
+Challenges are saved in an organized directory structure with full JSON metadata and all associated media files (images, videos), ready for dataset construction or further analysis.
 
 ---
 
-# 🔄 Workflow
+## Features
 
-```text
-Generate Fingerprint
-        │
-        ▼
-Load Configuration
-        │
-        ▼
-Initialize Session
-        │
-        ▼
-Fetch Site Config
-        │
-        ▼
-Solve HSL Proof
-        │
-        ▼
-Request Challenge
-        │
-        ▼
-Download Media
-        │
-        ▼
-Validate Files
-        │
-        ▼
-Save Dataset
-```
+- **No Browser Required** — Pure HTTP-based approach using `requests`. No Selenium, Playwright, or headless browsers.
+- **HSL Proof-of-Work Solver** — Built-in local solver for hCaptcha's hashcash-style proof-of-work challenges.
+- **Realistic Fingerprinting** — Generates randomized browser fingerprints with plausible screen resolutions, GPU renderers, user agents, and telemetry data.
+- **Full Motion Data** — Produces synthetic mouse movement, cursor flow, and interaction telemetry that passes hCaptcha's behavioral checks.
+- **Concurrent Media Downloads** — Multi-threaded image and video downloading with automatic format detection and fallback handling.
+- **Proxy Support** — Route all traffic through HTTP proxies to avoid rate limiting and IP-based blocking.
+- **Organized Output** — Challenges are saved by type (`image label binary`, `image label area select`, `image drag drop`) with auto-incrementing indices.
+- **Configurable** — Control the number of challenges to fetch, delay between requests, target sitekey, and proxy settings via a single JSON config file.
+- **Styled CLI Output** — Color-coded, timestamped logging with component labels for clear visibility into each step of the scraping process.
 
 ---
 
-# 🧠 Browser Fingerprinting
+## Supported Challenge Types
 
-The project generates realistic browser fingerprints before starting a scraping session.
+| Type | Description |
+|---|---|
+| `image_label_binary` | Select all images matching a given prompt |
+| `image_label_area_select` | Click on a specific region within an image |
+| `image_drag_drop` | Drag an element to the correct position |
 
-Generated information includes:
-
-* User-Agent
-* Platform
-* Screen Resolution
-* Timezone
-* Language
-* Canvas Fingerprint
-* WebGL Vendor
-* Rendering Information
-
-The fingerprint is stored inside:
-
-```text
-fingerprint.json
-```
-
-and reused by the HTTP client to mimic real browser sessions.
+Additional challenge types are saved automatically under their respective `request_type` folder names.
 
 ---
 
-# 🖱️ Human-like Behavior
+## Recommended Proxy Provider
 
-To emulate realistic browser interaction, the scraper includes two dedicated modules.
+<a href="https://infinixproxy.net/">
+  <img src="images/infinixproxy.png" alt="InfinixProxy" width="100%">
+</a>
 
-### `core/motion.py`
+This project is supported by [InfinixProxy](https://infinixproxy.net/) — high-quality residential and datacenter proxies at **$1/GB**. Reliable, fast, and affordable. If you are scraping at scale or need to rotate IPs to avoid rate limits, InfinixProxy is the recommended provider for this tool.
 
-Generates natural motion curves.
-
-Features:
-
-* Smooth acceleration
-* Smooth deceleration
-* Variable speed
+Visit [infinixproxy.net](https://infinixproxy.net/) to get started.
 
 ---
 
-### `core/cursorflw.py`
+## Prerequisites
 
-Creates realistic mouse paths.
-
-Features:
-
-* Human-like trajectories
-* Curved movement
-* Natural randomness
-* Position interpolation
+- Python 3.10 or higher
+- `pip` package manager
+- A working HTTP proxy
 
 ---
 
-# 🔐 HSL Solver
-
-The scraper performs HSL proof computation locally.
-
-Benefits:
-
-* No external solving service
-* Faster execution
-* Reduced latency
-* Complete control over the solving process
-
-Timing statistics are automatically recorded using the telemetry module.
-
----
-
-# 🌐 HTTP Client
-
-The custom HTTP client extends `requests.Session` with:
-
-* Browser fingerprints
-* Proxy support
-* Browser headers
-* Session management
-* Retry handling
-
----
-
-# 📥 Dataset Organization
-
-Every collected challenge is saved automatically.
-
-```text
-challenges/
-│
-├── image_drag_drop/
-│   └── challenge_0/
-│       ├── challenge.json
-│       └── media/
-│           ├── 0001.webp
-│           ├── 0002.webp
-│           └── ...
-│
-├── image_label_binary/
-│   └── challenge_1/
-│
-└── image_label_area_select/
-```
-
-Each challenge contains:
-
-* Original challenge JSON
-* All associated media
-* Preserved file structure
-
----
-
-# 📋 Configuration
-
-Example configuration:
-
-```json
-{
-    "proxy": "http://username:password@host:port",
-    "sitekey": "site_key_here",
-    "url": "https://example.com",
-    "max_challenges": 30,
-    "delay_sec": 2
-}
-```
-
-| Option         | Description            |
-| -------------- | ---------------------- |
-| proxy          | HTTP/HTTPS proxy       |
-| sitekey        | hCaptcha Site Key      |
-| url            | Target website         |
-| max_challenges | Number of challenges   |
-| delay_sec      | Delay between requests |
-
----
-
-# 🎨 Logging
-
-The project includes a custom logging framework.
-
-Example output:
-
-```text
-22:11:31 INFO      Collector      Fetching challenge 21/30
-22:11:33 OK        Solver         HSL solved in 0 ms
-22:11:42 SAVE      Storage        Saved challenge_6 (image_label_area_select • 2 files)
-
-22:11:44 WARNING   Network        HTTPSConnectionPool(...)
-```
-
-Features:
-
-* Component-based logging
-* ANSI colors
-* Fixed-width formatting
-* Session summaries
-* Clean alignment
-* Timestamped output
-
----
-
-# 📊 Telemetry
-
-Performance metrics currently tracked:
-
-* Site Configuration
-* Challenge Retrieval
-* HSL Solve Time
-
-The telemetry module can easily be extended with additional metrics.
-
----
-
-# ⚙️ Installation
-
-Clone the repository:
+## Installation
 
 ```bash
-git clone https://github.com/CodeRevised/hcaptcha-challenge-scraper.git
-cd hcaptcha-challenge-scraper
-```
-
-Install dependencies:
-
-```bash
+git clone https://github.com/CodeRevised/hCaptcha-Challenge-Scraper.git
+cd hCaptcha-Challenge-Scraper
 pip install -r requirements.txt
 ```
 
-Generate a fingerprint:
+### Dependencies
+
+| Package | Purpose |
+|---|---|
+| `requests` | HTTP client for all API calls and media downloads |
+| `numpy` | Numerical operations for motion data generation |
+| `matplotlib` | Curve fitting used in synthetic cursor trajectories |
+| `wcwidth` | Terminal width calculations for the CLI banner |
+
+---
+
+## Configuration
+
+### 1. Generate a Fingerprint
+
+Before scraping, generate a browser fingerprint that will be used across all requests:
 
 ```bash
 python generate_fingerprint.py
 ```
 
-Configure:
+This creates a `fingerprint.json` file containing a randomized but internally consistent browser fingerprint — screen dimensions, GPU info, user agent, canvas/WebGL hashes, and more.
 
-```text
-config/config.json
+### 2. Edit the Config File
+
+Create or modify `config/config.json`:
+
+```json
+{
+  "proxy": "http://user:pass@host:port",
+  "sitekey": "a5f74b19-9e45-40e0-b45d-47ff91b7a6c2",
+  "url": "https://accounts.hcaptcha.com/demo",
+  "max_challenges": 10,
+  "delay_sec": 0
+}
 ```
 
-Run:
+| Field | Type | Description |
+|---|---|---|
+| `proxy` | `string` | HTTP proxy URL (required) |
+| `sitekey` | `string` | The hCaptcha sitekey to target (required) |
+| `url` | `string` | The page URL where hCaptcha is deployed (required) |
+| `max_challenges` | `int` | Number of challenges to fetch per run (default: `30`) |
+| `delay_sec` | `float` | Delay in seconds between challenge fetches (default: `0`) |
+
+---
+
+## Usage
 
 ```bash
 python fetcher.py
 ```
 
----
+Or specify a custom config path:
 
-# 📦 Requirements
-
-```
-Python 3.10+
-matplotlib>=3.7.0
-numpy>=1.24.0
-requests>=2.31.0
-wcwidth>=0.2.5
+```bash
+python fetcher.py --config path/to/config.json
 ```
 
----
+The scraper will:
+1. Display the CLI banner with version and environment info
+2. Load the config and establish an HTTP session through the configured proxy
+3. Fetch the current hCaptcha API version
+4. Retrieve the site configuration for the target sitekey
+5. For each challenge:
+   - Solve the HSL proof-of-work locally
+   - Request a challenge from hCaptcha's API
+   - Download all associated media files (images/videos) concurrently
+   - Save the challenge JSON and media to `./challenges/<type>/challenge_<N>/`
+6. Print a summary of all challenges collected, grouped by type
 
-# 🔧 Core Modules
+### Output Structure
 
-| Module                  | Purpose                        |
-| ----------------------- | ------------------------------ |
-| generate_fingerprint.py | Browser fingerprint generation |
-| core/http_client.py     | HTTP session with fingerprints |
-| core/hcaptcha_client.py | hCaptcha API interactions      |
-| core/hsl_solver.py      | HSL proof solver               |
-| core/motion.py          | Motion simulation              |
-| core/cursorflw.py       | Cursor movement generation     |
-| core/saver.py           | Media downloading              |
-| core/telemetry.py       | Performance metrics            |
-| scraper/logger.py       | CLI logging                    |
-| scraper/banner.py       | Startup banner                 |
-| scraper/config.py       | Configuration loader           |
-| scraper/scraper.py      | Main scraper implementation    |
-
----
-
-# 🛡️ Error Handling
-
-The scraper is designed to continue running whenever possible.
-
-Handled scenarios include:
-
-* Network failures
-* Invalid proxies
-* Partial downloads
-* Missing media
-* Unexpected exceptions
-
-Rather than terminating, failed challenges are skipped while preserving dataset integrity.
+```
+challenges/
+  image label binary/
+    challenge_0/
+      challenge.json
+      img_0.png
+      img_1.png
+      ...
+    challenge_1/
+      ...
+  image label area select/
+    challenge_0/
+      challenge.json
+      example.png
+      ...
+  image drag drop/
+    ...
+```
 
 ---
 
-# 📈 Performance
+## Project Structure
 
-* Local HSL solving
-* Lightweight fingerprint reuse
-* Sequential media downloading
-* Configurable delays
-* Minimal memory usage
-
----
-
-# 🔒 Privacy
-
-* No analytics
-* No telemetry uploads
-* Local dataset storage
-* Local fingerprint generation
-* Optional proxy support
-
----
-
-# 🤝 Contributing
-
-Pull requests are welcome.
-
-Areas for contribution include:
-
-* Additional challenge support
-* Improved fingerprint generation
-* Better motion simulation
-* Performance optimizations
-* Logging improvements
-* New telemetry metrics
+```
+hcaptcha-challenge-scraper/
+├── fetcher.py
+├── generate_fingerprint.py
+├── requirements.txt
+├── config/
+│   ├── config.json
+├── core/
+│   ├── hcaptcha_client.py
+│   ├── hsl_solver.py
+│   ├── http_client.py
+│   ├── motion.py
+│   ├── cursorflow.py
+│   ├── telemetry.py
+│   ├── saver.py
+├── scraper/
+│   ├── __init__.py
+│   ├── scraper.py
+│   ├── config.py
+│   ├── banner.py
+│   ├── logger.py
+└── challenges/
+```
 
 ---
 
-# 📜 License
+## Screenshots
 
-This project is licensed under the **MIT License**.
+### Fingerprint Generation
+
+<img src="images/fingerprint_run.png" alt="Fingerprint generation output" width="100%">
+
+### Challenge Fetching
+
+<img src="images/fetcher_run.png" alt="Challenge fetcher output showing collected challenges and summary" width="100%">
 
 ---
 
-<p align="center">
-Made with <$ by <b>CodeRevised</b>
-</p>
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+© 2026 CodeRevised. All rights reserved.
