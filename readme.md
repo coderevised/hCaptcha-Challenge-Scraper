@@ -63,7 +63,7 @@ Additional challenge types are saved automatically under their respective `reque
   <img src="images/infinixproxy.png" alt="InfinixProxy" width="100%">
 </a>
 
-This project is supported by [InfinixProxy](https://infinixproxy.net/) — high-quality residential and datacenter proxies at **$1/GB**. Reliable, fast, and affordable. If you are scraping at scale or need to rotate IPs to avoid rate limits, InfinixProxy is the recommended provider for this tool.
+This project is supported by [InfinixProxy](https://infinixproxy.net/) — high-quality residential and datacenter proxies at **$0.75/GB**. Reliable, fast, and affordable. If you are scraping at scale or need to rotate IPs to avoid rate limits, InfinixProxy is the recommended provider for this tool.
 
 Visit [infinixproxy.net](https://infinixproxy.net/) to get started.
 
