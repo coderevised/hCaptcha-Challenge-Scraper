@@ -157,8 +157,26 @@ def save_challenge(challenge: dict, session: requests.Session, base_dir: Path = 
     type_folder = _find_existing_type_folder(base_dir, request_type)
     type_folder.mkdir(parents=True, exist_ok=True)
 
-    index = _get_next_index(type_folder)
-    challenge_dir = type_folder / f"challenge_{index}"
+    # Extract requester_question text
+    req_question = challenge.get("requester_question")
+    question_text = ""
+    if isinstance(req_question, dict):
+        question_text = req_question.get("en") or next((val for val in req_question.values() if isinstance(val, str)), "")
+    elif isinstance(req_question, str):
+        question_text = req_question
+
+    # Sanitize the question text for a directory name
+    sanitized_text = re.sub(r'[\\/*?:"<>|]', '', question_text).strip()
+    if not sanitized_text:
+        sanitized_text = "unknown_question"
+    else:
+        sanitized_text = sanitized_text[:120].strip()
+
+    target_folder = type_folder / sanitized_text
+    target_folder.mkdir(parents=True, exist_ok=True)
+
+    index = _get_next_index(target_folder)
+    challenge_dir = target_folder / f"challenge_{index}"
     challenge_dir.mkdir(parents=True, exist_ok=True)
 
     with open(challenge_dir / "challenge.json", "w", encoding="utf-8") as f:
