@@ -39,7 +39,7 @@ Challenges are saved in an organized directory structure with full JSON metadata
 - **Full Motion Data** — Produces synthetic mouse movement, cursor flow, and interaction telemetry that passes hCaptcha's behavioral checks.
 - **Concurrent Media Downloads** — Multi-threaded image and video downloading with automatic format detection and fallback handling.
 - **Proxy Support** — Route all traffic through HTTP proxies to avoid rate limiting and IP-based blocking.
-- **Organized Output** — Challenges are saved by type (`image label binary`, `image label area select`, `image drag drop`) with auto-incrementing indices.
+- **Organized Output** — Challenges are saved by type (`image label binary`, `image label area select`, `image drag drop`) and further grouped by the challenge's request question text (`requester_question`).
 - **Configurable** — Control the number of challenges to fetch, delay between requests, target sitekey, and proxy settings via a single JSON config file.
 - **Styled CLI Output** — Color-coded, timestamped logging with component labels for clear visibility into each step of the scraping process.
 
@@ -60,10 +60,10 @@ Additional challenge types are saved automatically under their respective `reque
 ## Recommended Proxy Provider
 
 <a href="https://infinixproxy.net/">
-  <img src="images/infinix_proxy.png" alt="InfinixProxy" width="100%">
+  <img src="images/infinixproxy.png" alt="InfinixProxy" width="100%">
 </a>
 
-This project is supported by [InfinixProxy](https://infinixproxy.net/) — high-quality residential and datacenter proxies at **$0.75/GB**. Reliable, fast, and affordable. If you are scraping at scale or need to rotate IPs to avoid rate limits, InfinixProxy is the recommended provider for this tool.
+This project is supported by [InfinixProxy](https://infinixproxy.net/) — high-quality residential and datacenter proxies at **$1/GB**. Reliable, fast, and affordable. If you are scraping at scale or need to rotate IPs to avoid rate limits, InfinixProxy is the recommended provider for this tool.
 
 Visit [infinixproxy.net](https://infinixproxy.net/) to get started.
 
@@ -153,7 +153,7 @@ The scraper will:
    - Solve the HSL proof-of-work locally
    - Request a challenge from hCaptcha's API
    - Download all associated media files (images/videos) concurrently
-   - Save the challenge JSON and media to `./challenges/<type>/challenge_<N>/`
+   - Save the challenge JSON and media to `./challenges/<type>/<question_text>/challenge_<N>/`
 6. Print a summary of all challenges collected, grouped by type
 
 ### Output Structure
@@ -161,20 +161,24 @@ The scraper will:
 ```
 challenges/
   image label binary/
-    challenge_0/
-      challenge.json
-      img_0.png
-      img_1.png
-      ...
-    challenge_1/
-      ...
+    Select every animal that spends time in trees/
+      challenge_0/
+        challenge.json
+        img_0.png
+        img_1.png
+        ...
+      challenge_1/
+        ...
   image label area select/
-    challenge_0/
-      challenge.json
-      example.png
-      ...
+    Please click on the center of the flower/
+      challenge_0/
+        challenge.json
+        example.png
+        ...
   image drag drop/
-    ...
+    Please drag the shape to the arrow/
+      challenge_0/
+        ...
 ```
 
 ---
