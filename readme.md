@@ -60,7 +60,7 @@ Additional challenge types are saved automatically under their respective `reque
 ## Recommended Proxy Provider
 
 <a href="https://infinixproxy.net/">
-  <img src="images/infinixproxy.png" alt="InfinixProxy" width="100%">
+  <img src="images/infinix_proxy.png" alt="InfinixProxy" width="100%">
 </a>
 
 This project is supported by [InfinixProxy](https://infinixproxy.net/) — high-quality residential and datacenter proxies at **$1/GB**. Reliable, fast, and affordable. If you are scraping at scale or need to rotate IPs to avoid rate limits, InfinixProxy is the recommended provider for this tool.
