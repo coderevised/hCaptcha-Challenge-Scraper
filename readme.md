@@ -160,24 +160,20 @@ The scraper will:
 
 ```
 challenges/
-  image label binary/
-    Select every animal that spends time in trees/
-      challenge_0/
-        challenge.json
-        img_0.png
-        img_1.png
-        ...
-      challenge_1/
-        ...
-  image label area select/
-    Please click on the center of the flower/
-      challenge_0/
-        challenge.json
-        example.png
-        ...
-  image drag drop/
-    Please drag the shape to the arrow/
-      challenge_0/
+├── image label binary/
+│     └── Select every animal that spends time in trees/
+│         └── challenge_0/
+│              ├── challenge.json
+│              ├── img_0.png
+│              └── img_1.png
+├── image label area select/
+│    └── Please click on the center of the flower/
+│         └── challenge_0/
+│              ├── challenge.json
+│              └── example.png
+└── image drag drop/
+     └── Please drag the shape to the arrow/
+          └── challenge_0/
         ...
 ```
 
